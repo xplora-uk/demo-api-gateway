@@ -35,6 +35,17 @@ SUBGRAPH_1_URL="http://localhost:15001/graphql"
 
 SUBGRAPH_2_NAME="users"
 SUBGRAPH_2_URL="http://localhost:15002/graphql"
+
+
+PROXY_COUNT="2"
+
+PROXY_1_PREFIX="/auctions/v1"
+PROXY_1_TARGET="http://localhost:16001"
+PROXY_1_PUBLIC=""
+
+PROXY_2_PREFIX="/news/v2"
+PROXY_2_TARGET="http://localhost:16002"
+PROXY_2_PUBLIC="1"
 ```
 
 ## linting
@@ -56,7 +67,13 @@ cd demo-gql-campaigns && npm run start
 # terminal 2: a server of federation
 cd demo-gql-users && npm run start
 
-# terminal 3: gateway to federation
+# terminal 3: auction microservice
+cd demo-rest-auctions && npm run start
+
+# terminal 4: news microservice
+cd demo-rest-news && npm run start
+
+# terminal 5: gateway to federation
 npm run start
 ```
 
