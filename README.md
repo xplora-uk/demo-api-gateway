@@ -77,6 +77,14 @@ cd demo-rest-news && npm run start
 npm run start
 ```
 
+Sample cURL request:
+
+```sh
+curl --location 'http://localhost:15000/graphql' \
+--header 'Content-Type: application/json' \
+--data '{"query":"query {\n  campaigns { # to be resolved by demo-gql-campaigns\n    id\n    title\n    owner { # to resolved by demo-gql-users\n      id\n      username\n    }\n  }\n}","variables":{}}'
+```
+
 Sample GraphQL command:
 
 ```graphql
