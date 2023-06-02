@@ -37,6 +37,8 @@ async function makeHttpServer(config) {
   app.use(cookieParser());
   app.use(createLocaleMiddleware()); // req.locale -> { source: 'default', language: 'en', region: 'GB' }
 
+  app.use('/graphql', express.json()); // Apollo Gateway requires JSON body
+
   app.get('/health', health);
   app.get('/', root);
 

@@ -99,3 +99,17 @@ query {
   }
 }
 ```
+
+## usage
+
+We expect to have a public domain name for API Gateway
+
+```plain
+https://api-gw.xplora.com
+
+
+https://api-gw.xplora.com/graphql
+https://api-gw.xplora.com/auctions/v1
+https://api-gw.xplora.com/news/v1
+
+```

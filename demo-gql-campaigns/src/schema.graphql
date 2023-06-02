@@ -5,9 +5,10 @@ type Query {
 type Campaign @key(fields: "id") {
   id: ID!
   title: String!
+  # other attributes
 }
 
 extend type User @key(fields: "id") {
   id: ID! @external
-  campaigns: [Campaign!]!
+  campaigns: [Campaign!]! # <-- injecting new attribute
 }
