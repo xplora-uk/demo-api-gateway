@@ -12,6 +12,7 @@ module.exports = {
 
   // extensions for HTTP headers
   HTTP_HEADER_X_POWERED_BY            : 'x-powered-by',
+
   // extensions for HTTP headers - Xplora
   HTTP_HEADER_X_XPLORA_IP             : 'x-xplora-ip',
   HTTP_HEADER_X_XPLORA_TXN_ID         : 'x-xplora-txn-id',
