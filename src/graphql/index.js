@@ -45,7 +45,7 @@ async function makeGraphqlServer(config, httpServer) {
         authToken: req.get(HTTP_HEADER_H_BACKDOOR_AUTHORIZATION) || '',
         txnId: req.get(HTTP_HEADER_H_TRANSACTION_ID) || '',
         newAuthToken: req.get(HTTP_HEADER_AUTHORIZATION) || '',
-        userRid: 'abc123', // TODO: get from auth token
+        userRid: req.get(HTTP_HEADER_X_XPLORA_USER_RID) || '',
       };
     },
   };
