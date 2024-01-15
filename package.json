@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "start": "node .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start:monitor": "nodemon ./src/index.js --watch ./src"
   },
   "repository": {
     "type": "git",
@@ -38,5 +39,8 @@
     "helmet": "^7.0.0",
     "http-proxy-middleware": "^2.0.6",
     "request-ip": "^3.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
   }
 }
