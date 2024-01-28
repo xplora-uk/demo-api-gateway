@@ -9,13 +9,13 @@ const timeout = require('connect-timeout');
 const { attachProxyMiddlewareList } = require('../proxy');
 const constants = require('../constants');
 
-async function makeHttpServer(config) {
+async function makeHttpServer(config, logger, jwtService) {
   const app = express();
 
   app.disable(constants.HTTP_HEADER_X_POWERED_BY);
 
   function logAccess(req, res, next) {
-    console.info(new Date(), `${req.method} ${req.originalUrl}`);
+    logger.info(`${req.method} ${req.originalUrl}`);
     next();
   }
 
@@ -43,7 +43,7 @@ async function makeHttpServer(config) {
   app.get('/', root);
 
   // let's do it before JSON middleware - otherwise we need to parse JSON twice and fix some headers like content-length.
-  const proxyMiddlewareList = await attachProxyMiddlewareList(config, app);
+  const proxyMiddlewareList = await attachProxyMiddlewareList(config, logger, app, jwtService);
 
   const httpServer = http.createServer(app);
 
