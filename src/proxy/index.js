@@ -2,12 +2,12 @@ const { createProxyMiddleware,  } = require('http-proxy-middleware');
 const constants = require('../constants');
 
 // side-effect on express app
-function attachProxyMiddlewareList(config, app) {
+function attachProxyMiddlewareList(config, logger, app, jwtService) {
   const proxyMiddlewareList = [];
 
   function makeErrorHandler() {
     function onError(err, req, res) {
-      console.error(`Proxy error: ${err.message}`);
+      logger.error(`Proxy error: ${err.message}`);
     }
 
     return onError;
@@ -16,7 +16,7 @@ function attachProxyMiddlewareList(config, app) {
   function makeProxyReqHandler({ pathFilter, target, isPublic }) {
 
     async function onProxyReq(proxyReq, req, res) {
-      console.info('Proxying request to', target, 'for', req.originalUrl);
+      logger.info('Proxying request to ' + target + ' for ' + req.originalUrl);
       if (!isPublic) {
         const token = String(req.get(constants.HTTP_HEADER_H_AUTHORIZATION) || '').trim();
         if (token === '') {
@@ -42,7 +42,7 @@ function attachProxyMiddlewareList(config, app) {
   }
 
   for (let p of config.http.proxyList) {
-    console.info(`Proxying ${p.prefix} to ${p.target} (public: ${p.isPublic?'yes':'no'})`);
+    logger.info(`Proxying ${p.prefix} to ${p.target} (public: ${p.isPublic ? 'yes' : 'no'})`);
     const proxyMiddleware = createProxyMiddleware({
       changeOrigin: true,
       target: p.target,

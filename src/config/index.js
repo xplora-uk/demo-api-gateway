@@ -1,6 +1,22 @@
 const constants = require('../constants');
 
 function makeConfig(penv) {
+  const app = {
+    env      : penv.NODE_ENV || 'development',
+    namespace: penv.APP_NAMESPACE || 'api',
+    name     : penv.APP_NAME || 'auth-api',
+    version  : penv.APP_VERSION || '1.0.0',
+  };
+
+  const logger = {
+    app: {
+      app_name   : app.name,
+      app_version: app.version,
+      env        : app.env,
+    },
+    kind: penv.LOGGER_KIND || 'pino',
+    level: penv.LOG_LEVEL || 'info',
+  };
 
   let httpPort = Number.parseInt(penv.HTTP_PORT || '15000');
   if (Number.isNaN(httpPort) || httpPort < 0 || httpPort > 65535) httpPort = 15000;
@@ -74,6 +90,9 @@ function makeConfig(penv) {
   }
   // ----
 
+  const jwtSecret = String(penv.JWT_SECRET || '').trim();
+  if (!jwtSecret) throw new Error('JWT_SECRET is required');
+
   return {
     http: {
       port: httpPort,
@@ -84,11 +103,15 @@ function makeConfig(penv) {
       timeoutOptions,
       requestTimeoutInSeconds: httpRequestTimeoutInSeconds,
     },
+    graphql: {
+      federation,
+    },
     proxy: {
       timeoutInMilliseconds: (httpRequestTimeoutInSeconds - 1) * 1000
     },
-    graphql: {
-      federation,
+    logger,
+    security: {
+      jwtSecret,
     },
   };
 }

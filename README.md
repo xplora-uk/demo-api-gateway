@@ -6,7 +6,7 @@ We will use [Apollo Gateway](https://www.apollographql.com/docs/apollo-server/us
 
 ## requirements
 
-* Node v16.x
+* Node v18.x
   * NVM is recommended
 
 ## installation

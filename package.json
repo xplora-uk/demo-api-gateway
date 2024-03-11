@@ -28,6 +28,8 @@
   "dependencies": {
     "@apollo/gateway": "^2.4.5",
     "@apollo/server": "^4.7.1",
+    "@godaddy/terminus": "^4.12.1",
+    "@xplora-uk/logger": "^1.1.0",
     "connect-timeout": "^1.9.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -38,9 +40,13 @@
     "graphql": "^16.6.0",
     "helmet": "^7.0.0",
     "http-proxy-middleware": "^2.0.6",
+    "jsonwebtoken": "^9.0.2",
     "request-ip": "^3.3.0"
   },
   "devDependencies": {
     "nodemon": "^3.0.2"
+  },
+  "engines": {
+    "node": ">=18 <19"
   }
 }
